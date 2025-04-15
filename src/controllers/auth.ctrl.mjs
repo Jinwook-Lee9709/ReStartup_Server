@@ -1,24 +1,73 @@
-import jwtUtils from '../utils/jwt.utils.mjs';
+import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import jwtUtils from '../utils/jwt.utils.mjs';
+
+import { Login, Register } from '../models/auth.dao.mjs';
+
+
+import jwt from "jsonwebtoken";
 
 export const jwtAuth = {
     sign: async(req, res) =>{
-        const uid = req.body.uid;
-        const result = jwtUtils.sign(uid);
+        const uuid = req.body.uuid;
+        const result = jwtUtils.sign(uuid);
         return res.status(200).json(result);
     },
     verify: async(req, res) =>{
-        const token = req.body.token;
+        const token = req.query.token;
         const result = jwtUtils.verify(token);
-        return res.status(200).json(result);
+        return res.status(200).json(result.type);
+    },
+    refresh: async(req, res) =>{
+        const token = req.query.token;
+        const verifyResult = jwtUtils.refreshVerify(token);
+        if(!verifyResult.type)
+            return res.status(401).json({error: 'Invalid Token'});
+
+        const uuid = verifyResult.uuid;
+        const newToken = jwtUtils.sign(uuid);
+        return res.status(200).json(newToken);
+    }
+}
+export const register = {
+    guest: async(req, res) =>{
+        try
+        {
+            const userData =
+                {
+                    uuid: uuidv4(),
+                    providerId: uuidv4(),
+                    loginSource: 'Guest',
+                }
+            const result = await Register.getUser(userData);
+            console.log(result);
+            return res.status(200).json(userData.providerId);
+        }catch (err)
+        {
+            console.log(`Register Request Failed with : ${err}`);
+            return res.status(500);
+        }
+
     }
 }
 
 export const login ={
-    loginWithHash: async(req, res) =>{
-        const uid = req.body.uid;
-        const result = jwtUtils.sign(uid);
-        return res.status(200).json(result);
+    guest: async(req, res) =>{
+        if(req.query.uuid === undefined)
+            return res.status(400).json({error: 'uuid is required'});
+        try
+        {
+            const uuid = req.query.uuid;
+            const userInfo = await Login.getUserByProviderId(uuid)
+            const token = jwtUtils.sign(userInfo.uuid);
+            const refreshToken = jwtUtils.refresh(userInfo.uuid);
+            return res.status(200).json({token, refreshToken});
+        }
+        catch(error)
+        {
+            return res.status(500).json({error: 'Internal Server Error'});
+        }
+
     },
     googleAuthenticate: async(req, res) =>{
         const { AuthCode } = req.body;
@@ -37,10 +86,10 @@ export const login ={
         }catch (err)
         {
             console.log(`google Auth Request Failed with : ${err}`);
+            return res.status(500);
         }
-        console.log(resp);
-        res.sendStatus(200);
+        return res.status(200);
     }
 }
 
-export default { jwtAuth, login }
+export default { jwtAuth, register, login  };

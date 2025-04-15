@@ -1,11 +1,9 @@
 import jwt from 'jsonwebtoken';
 
 export const jwtUtils = {
-    sign: (uid) =>{
-        console.log('ACCESS_TOKEN_SECRET:', process.env.ACCESS_TOKEN_SECRET);
-
+    sign: (uuid) =>{
         const payload = {
-            uid: uid
+            uuid: uuid
         };
         return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: '1h',
@@ -15,13 +13,12 @@ export const jwtUtils = {
     verify: (token) => {
         let decoded = null;
         try{
-
             decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {
                 algorithm: 'HS256'
             });
             return {
                 type: true,
-                uid: decoded.uid,
+                uuid: decoded.uuid,
             }
         } catch(err){
             return {
@@ -30,8 +27,11 @@ export const jwtUtils = {
             }
         }
     },
-    refresh: () => {
-        return jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, {
+    refresh: (uuid) => {
+        const payload = {
+            uuid: uuid
+        };
+        return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
             expiresIn: '14d',
             algorithm: 'HS256'
         })
@@ -43,6 +43,7 @@ export const jwtUtils = {
                 algorithm: 'HS256'
             });
             return {
+                uuid: decoded.uuid,
                 type: true,
             }
         } catch(err){
