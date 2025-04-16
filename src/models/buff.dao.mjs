@@ -10,7 +10,7 @@ const SAVE_BUFFS_QUERY = `INSERT INTO buffs (uuid, id, remain_time)
                           VALUES ? ON DUPLICATE KEY
                           UPDATE remain_time =
                           VALUES (remain_time)`;
-
+const DELETE_BUFF_QUERY = `DELETE FROM buffs WHERE uuid = ? AND id = ?`;
 
 export const Buff = {
     getBuffs: async (uuid) => {
@@ -37,6 +37,15 @@ export const Buff = {
             }
             const values = arr.map(({ id, remain_time }) => [uuid, id, remain_time]);
             const [result] = await db.query(SAVE_BUFFS_QUERY, [values]);
+            return result.affectedRows > 0;
+        }catch(error){
+            console.log(error);
+            throw error;
+        }
+    },
+    deleteBuff: async (uuid, id) => {
+        try{
+            const [result] = await db.query(DELETE_BUFF_QUERY, [uuid, id]);
             return result.affectedRows > 0;
         }catch(error){
             console.log(error);

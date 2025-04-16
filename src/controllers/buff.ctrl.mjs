@@ -24,6 +24,14 @@ export const buff = {
             const result = await Buff.saveBuffs(uuid, arr);
             return result ? {} : null;
         }, res)
+    },
+    deleteBuff: async(req,res) => {
+        await handleRequest(async () => {
+            const uuid = req.uuid;
+            const id = req.body.id;
+            const result = await Buff.deleteBuff(uuid, id);
+            return result ? {} : null;
+        }, res)
     }
 }
 
