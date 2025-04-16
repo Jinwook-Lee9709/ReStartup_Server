@@ -1,16 +1,16 @@
 import { db } from '../config/db.mjs';
 
-const GET_BUFF_QUERY = `SELECT * FROM buffs WHERE uuid = ?`;
+const GET_BUFF_QUERY = `SELECT * FROM buff WHERE uuid = ?`;
 
-const SAVE_BUFF_QUERY = `INSERT INTO buffs (uuid, id, remain_time)
+const SAVE_BUFF_QUERY = `INSERT INTO buff (uuid, id, remain_time)
                          VALUES (?, ?, ?) ON DUPLICATE KEY
                          UPDATE remain_time =
                          VALUES (remain_time)`;
-const SAVE_BUFFS_QUERY = `INSERT INTO buffs (uuid, id, remain_time)
+const SAVE_BUFFS_QUERY = `INSERT INTO buff (uuid, id, remain_time)
                           VALUES ? ON DUPLICATE KEY
                           UPDATE remain_time =
                           VALUES (remain_time)`;
-const DELETE_BUFF_QUERY = `DELETE FROM buffs WHERE uuid = ? AND id = ?`;
+const DELETE_BUFF_QUERY = `DELETE FROM buff WHERE uuid = ? AND id = ?`;
 
 export const Buff = {
     getBuffs: async (uuid) => {
