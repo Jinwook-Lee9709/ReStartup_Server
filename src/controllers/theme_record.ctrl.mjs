@@ -16,7 +16,7 @@ export const general = {
             const theme = req.params.theme;
             const result = await General.getRecords(uuid, theme);
             return result != null ? { result } : null;
-        })
+        }, res)
     }
 
 };
