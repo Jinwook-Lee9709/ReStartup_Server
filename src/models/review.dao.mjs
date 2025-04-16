@@ -2,7 +2,7 @@ import { db } from '../config/db.mjs';
 
 const INSERT_REVIEW_PROCEDURE = `CALL InsertReview(?, ?, ?)`;
 const DELETE_REVIEW_PROCEDURE  = `CALL DeleteMiddleAndReorder(?, ?)`;
-const GET_ALL_REVIEW_QUERY = `SELECT * FROM Review WHERE uuid = ?`;
+const GET_ALL_REVIEW_QUERY = `SELECT * FROM review WHERE uuid = ?`;
 
 export const Review = {
     insert: async (uuid, isPositive, reviewId)=>
