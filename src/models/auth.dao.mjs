@@ -26,3 +26,16 @@ export const Register = {
         }
     }
 }
+
+export const Delete = {
+    deleteUser: async (uuid) => {
+        try {
+            console.log('Deleting user: ', uuid);
+            const [result] = await db.query(`DELETE FROM users WHERE uuid = ?`, [uuid]);
+            return result;
+        } catch (error) {
+            console.log('DB Error: ', error.message);
+            throw new Error(error);
+        }
+    }
+}

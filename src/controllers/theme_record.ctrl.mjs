@@ -10,6 +10,15 @@ export const general = {
             return result ? {} : null; // 성공 시 빈 객체 반환
         }, res);
     },
+    getRecords: async(req, res) => {
+        await handleRequest(async () => {
+            const uuid = req.uuid;
+            const theme = req.params.theme;
+            const result = await General.getRecords(uuid, theme);
+            return result != null ? { result } : null;
+        })
+    }
+
 };
 
 export const process = {

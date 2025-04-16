@@ -5,6 +5,7 @@ import themeRecordCtrl from "../../controllers/theme_record.ctrl.mjs";
 
 const router = Router();
 
+router.get ('/api/users/progress/getRecords', authenticateUser, themeRecordCtrl.general.getRecords);
 router.post ('/api/users/progress/insertRecords', authenticateUser, themeRecordCtrl.general.insertRecords);
 
 router.get ('/api/users/progress/getRanking', authenticateUser, themeRecordCtrl.process.getRanking);

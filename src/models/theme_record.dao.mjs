@@ -1,6 +1,11 @@
 import { db } from '../config/db.mjs';
 
-const INSERT_RECORDS_QUERY = `INSERT INTO theme_records (uuid, theme, cumulative, ranking, rank_point) VALUES (?, ?, ?, ?, ?)`;
+const INSERT_RECORDS_QUERY = `INSERT INTO theme_records (uuid, theme, cumulative, ranking, rank_point) VALUES (?, ?, ?, ?, ?)
+                        ON DUPLICATE KEY UPDATE 
+                        cumulative = VALUES(cumulative),
+                        ranking = VALUES(ranking),
+                        rank_point = VALUES(rank_point)`;
+const GET_RECORDS_QUERY = `SELECT * FROM theme_records WHERE uuid = ? && theme = ?`;
 
 const GET_RANKING_QUERY = `SELECT ranking FROM theme_records WHERE uuid = ? AND theme = ?`;
 const UPDATE_RANKING_QUERY = `UPDATE theme_records SET ranking = ? WHERE uuid = ? AND theme = ?`;
@@ -19,6 +24,18 @@ export const General = {
             const [result] = await db.query(INSERT_RECORDS_QUERY, [uuid, theme, cumulative, ranking, rank_point]);
             console.log(result);
             return result.affectedRows > 0;
+        }
+        catch (error)
+        {
+            console.log('DB Error: ', error.message);
+            return false;
+        }
+    },
+    getRecords : async(uuid, theme) => {
+        try
+        {
+            const [rows] = await db.query(GET_RECORDS_QUERY, [uuid, theme]);
+            return rows.length > 0 ? rows[0] : null;
         }
         catch (error)
         {

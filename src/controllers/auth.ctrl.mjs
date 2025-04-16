@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import jwtUtils from '../utils/jwt.utils.mjs';
 
-import { Login, Register } from '../models/auth.dao.mjs';
+import { Login, Register, Delete } from '../models/auth.dao.mjs';
 
 
 import jwt from "jsonwebtoken";
@@ -92,4 +92,19 @@ export const login ={
     }
 }
 
-export default { jwtAuth, register, login  };
+export const deleteUser = {
+    delete: async(req, res) =>{
+        try
+        {
+            const uuid = req.uuid;
+            const result = await Delete.deleteUser(uuid);
+            return res.status(200).json(result.affectedRows > 0);
+        }catch (err)
+        {
+            console.log(`Delete Request Failed with : ${err}`);
+            return res.status(500);
+        }
+    }
+}
+
+export default { jwtAuth, register, login, deleteUser };

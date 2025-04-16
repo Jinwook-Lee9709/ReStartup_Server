@@ -13,14 +13,14 @@ export const process = {
         await handleRequest(async() =>{
             const currency = req.body.currency;
             const result = await SaveCurrency.single(req.uuid, currency);
-            result ? {} : null;
+            return result ? {} : null;
         }, res)
     },
     saveMultipleCurrencies: async(req, res) => {
         await handleRequest(async() => {
             const arr = req.body.currencies;
             const result = SaveCurrency.multiple(req.uuid, arr);
-            result ? {} : null;
+            return result ? {} : null;
         }, res)
     }
 }
