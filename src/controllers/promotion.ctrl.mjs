@@ -14,7 +14,7 @@ export const process ={
             const uuid = req.uuid;
             const arr = req.body.info;
             const result = await Promotion.savePromotion(uuid, arr);
-            return result != null ? { result } : null;
+            return result ? {} : null;
         }, res)
     },
 }
