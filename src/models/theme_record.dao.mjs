@@ -37,8 +37,8 @@ export const General = {
     getRecords : async(uuid, theme) => {
         try
         {
+            console.log(uuid, theme);
             const [rows] = await db.query(GET_RECORDS_QUERY, [uuid, theme]);
-            console.log(rows);
             return rows;
         }
         catch (error)
