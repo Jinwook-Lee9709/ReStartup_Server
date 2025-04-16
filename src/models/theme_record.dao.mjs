@@ -20,6 +20,9 @@ export const General = {
     insertRecords : async(uuid, records) => {
         try
         {
+            if (typeof records === "string") {
+                records = JSON.parse(records);
+            }
             const {theme, cumulative, ranking, rank_point} = records;
             const [result] = await db.query(INSERT_RECORDS_QUERY, [uuid, theme, cumulative, ranking, rank_point]);
             console.log(result);
