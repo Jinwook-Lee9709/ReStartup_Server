@@ -2,7 +2,7 @@ import { db }  from '../config/db.mjs';
 
 const GET_PROMOTIONS_QUERY = `SELECT * FROM promotion WHERE uuid = ?`;
 const SAVE_PROMOTIONS_QUERY =  `INSERT INTO promotion (uuid, id, buy_use_count, ad_use_count)
-                                VALUES ? ON DUPLICATE KEY buy_use_count =
+                                VALUES ? ON DUPLICATE KEY UPDATE buy_use_count =
                                 VALUES (buy_use_count), ad_use_count =
                                 VALUES (ad_use_count)`;
 
