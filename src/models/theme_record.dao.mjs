@@ -5,7 +5,7 @@ const INSERT_RECORDS_QUERY = `INSERT INTO theme_records (uuid, theme, cumulative
                         cumulative = VALUES(cumulative),
                         ranking = VALUES(ranking),
                         rank_point = VALUES(rank_point)`;
-const GET_RECORDS_QUERY = `SELECT * FROM theme_records WHERE uuid = ? && theme = ?`;
+const GET_RECORDS_QUERY = `SELECT * FROM theme_records WHERE uuid = ? AND theme = ?`;
 
 const GET_RANKING_QUERY = `SELECT ranking FROM theme_records WHERE uuid = ? AND theme = ?`;
 const UPDATE_RANKING_QUERY = `UPDATE theme_records SET ranking = ? WHERE uuid = ? AND theme = ?`;
@@ -38,6 +38,7 @@ export const General = {
         try
         {
             const [rows] = await db.query(GET_RECORDS_QUERY, [uuid, theme]);
+            console.log(rows);
             return rows;
         }
         catch (error)
