@@ -25,7 +25,7 @@ export const Buff = {
     saveBuff: async (uuid, id, remain_time) => {
         try{
             const [result] = await db.query(SAVE_BUFF_QUERY, [uuid, id, remain_time]);
-            return result.affectedRows;
+            return result.affectedRows > 0;
         }catch(error){
 
         }
