@@ -5,9 +5,9 @@ import reviewCtrl from "../../controllers/review.ctrl.mjs";
 
 const router = Router();
 
-router.get("/api/user/progress/getAll", authenticateUser, reviewCtrl.process.getAll);
-router.post("/api/user/progress/insert", authenticateUser, reviewCtrl.process.insert);
-router.post("/api/user/progress/delete", authenticateUser, reviewCtrl.process.delete);
+router.get("/api/users/progress/getAll", authenticateUser, reviewCtrl.process.getAll);
+router.post("/api/users/progress/insert", authenticateUser, reviewCtrl.process.insert);
+router.post("/api/users/progress/delete", authenticateUser, reviewCtrl.process.delete);
 
 
 export default router;
