@@ -1,7 +1,7 @@
 import { Promotion } from '../models/promotion.dao.mjs';
 import { handleRequest } from "../utils/template.mjs";
 
-export default process ={
+export const process ={
     getAllPromotions: async (req, res) => {
         await handleRequest(async () => {
             const uuid = req.uuid;
@@ -18,5 +18,8 @@ export default process ={
         })
     },
 }
+
+export default { process };
+
 
 
