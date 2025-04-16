@@ -13,7 +13,7 @@ export const process ={
         await handleRequest(async () => {
             const uuid = req.uuid;
             const arr = req.body.info;
-            const result = await Promotion.savePromotion(arr);
+            const result = await Promotion.savePromotion(uuid, arr);
             return result != null ? { result } : null;
         })
     },
