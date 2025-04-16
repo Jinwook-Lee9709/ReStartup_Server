@@ -35,8 +35,8 @@ export const process = {
     saveRanking: async (req, res) => {
         await handleRequest(async () => {
             const uuid = req.uuid;
-            const theme = req.body.rankdata?.theme;
-            const ranking = req.body.rankdata?.ranking;
+            const theme = req.body.theme;
+            const ranking = req.body.ranking;
             if(theme == null || ranking == null)
                 return null;
             const result = await Rank.saveRanking(uuid, theme, ranking);
