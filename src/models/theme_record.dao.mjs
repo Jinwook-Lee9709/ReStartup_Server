@@ -38,7 +38,7 @@ export const General = {
         try
         {
             const [rows] = await db.query(GET_RECORDS_QUERY, [uuid, theme]);
-            return rows.length > 0 ? rows[0] : null;
+            return rows;
         }
         catch (error)
         {
