@@ -25,7 +25,6 @@ export const General = {
             }
             const {theme, cumulative, ranking, rank_point} = records;
             const [result] = await db.query(INSERT_RECORDS_QUERY, [uuid, theme, cumulative, ranking, rank_point]);
-            console.log(result);
             return result.affectedRows > 0;
         }
         catch (error)
@@ -37,7 +36,6 @@ export const General = {
     getRecords : async(uuid, theme) => {
         try
         {
-            console.log(uuid, theme);
             const [rows] = await db.query(GET_RECORDS_QUERY, [uuid, theme]);
             return rows;
         }

@@ -13,7 +13,7 @@ export const general = {
     getRecords: async(req, res) => {
         await handleRequest(async () => {
             const uuid = req.uuid;
-            const theme = req.params.theme;
+            const theme = req.query.theme;
             const result = await General.getRecords(uuid, theme);
             return result != null ? { result } : null;
         }, res)
