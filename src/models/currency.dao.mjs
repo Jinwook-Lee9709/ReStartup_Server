@@ -1,7 +1,7 @@
 import { db } from '../config/db.mjs';
 
 const GET_CURRENCIES_QUERY = `SELECT currency_type, amount FROM user_currency WHERE uuid = ?`;
-const SAVE_CURRENCY_QUERY = `INSERT INTO user_currency (uuid, currency_type, amount)VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE amount = ?;`;
+const SAVE_CURRENCY_QUERY = `INSERT INTO user_currency (uuid, currency_type, amount)VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE amount = ?`;
 const SAVE_CURRENCIES_QUERY = `INSERT INTO user_currency (uuid, currency_type, amount) VALUES ? ON DUPLICATE KEY UPDATE amount = VALUES(amount)`;
 
 export const GetCurrency = {
