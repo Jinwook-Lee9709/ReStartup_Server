@@ -8,7 +8,6 @@ export const Review = {
     insert: async (uuid, isPositive, reviewId, createdTime)=>
     {
         try{
-            console.log(uuid, isPositive, reviewId, createdTime);
             const [result] = await db.execute(INSERT_REVIEW_PROCEDURE, [uuid, isPositive, reviewId, createdTime]);
             return result.affectedRows > 0;
         }catch(error){
