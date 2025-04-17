@@ -1,14 +1,14 @@
 import { db } from '../config/db.mjs';
 
-const INSERT_REVIEW_PROCEDURE = `CALL InsertReview(?, ?, ?)`;
+const INSERT_REVIEW_PROCEDURE = `CALL InsertReview(?, ?, ?, ?)`;
 const DELETE_REVIEW_PROCEDURE  = `CALL DeleteMiddleAndReorder(?, ?)`;
 const GET_ALL_REVIEW_QUERY = `SELECT * FROM review WHERE uuid = ?`;
 
 export const Review = {
-    insert: async (uuid, isPositive, reviewId)=>
+    insert: async (uuid, isPositive, reviewId, createdTime)=>
     {
         try{
-            const [result] = await db.execute(INSERT_REVIEW_PROCEDURE, [uuid, isPositive, reviewId]);
+            const [result] = await db.execute(INSERT_REVIEW_PROCEDURE, [uuid, isPositive, reviewId, createdTime]);
             return result.affectedRows > 0;
         }catch(error){
             console.log(error);

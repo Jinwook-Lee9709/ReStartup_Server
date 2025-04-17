@@ -7,8 +7,8 @@ export const process = {
             const uuid = req.uuid;
             const isPositive = req.body.isPositive;
             const reviewId = req.body.reviewId;
-            console.log(uuid, isPositive, reviewId);
-            const result = await Review.insert(uuid, isPositive, reviewId);
+            const createdTime = req.body.createdTime;
+            const result = await Review.insert(uuid, isPositive, reviewId, createdTime);
             return result ? {} : null;
         }, res)
     },
