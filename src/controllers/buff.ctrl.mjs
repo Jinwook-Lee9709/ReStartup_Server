@@ -9,10 +9,9 @@ export const buff = {
         },res)
     },
     saveBuff: async(req,res) => {
-        await handleRequest(async () => {
+        await handleRequest(async () => {console.log(req.body)
             const uuid = req.uuid;
             const buff_type = req.body.buff_type;
-            console.log(buff_type);
             const id = req.body.id;
             const remain_time = req.body.remain_time;
             const result = await Buff.saveBuff(uuid, buff_type, id, remain_time);
