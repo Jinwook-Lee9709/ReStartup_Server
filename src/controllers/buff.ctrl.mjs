@@ -11,9 +11,10 @@ export const buff = {
     saveBuff: async(req,res) => {
         await handleRequest(async () => {
             const uuid = req.uuid;
+            const buff_type = req.body.buff_type;
             const id = req.body.id;
             const remain_time = req.body.remain_time;
-            const result = await Buff.saveBuff(uuid, id, remain_time);
+            const result = await Buff.saveBuff(uuid, buff_type, id, remain_time);
             return result ? {} : null;
         }, res)
     },
@@ -28,8 +29,8 @@ export const buff = {
     deleteBuff: async(req,res) => {
         await handleRequest(async () => {
             const uuid = req.uuid;
-            const id = req.body.id;
-            const result = await Buff.deleteBuff(uuid, id);
+            const type = req.body.buff_type;
+            const result = await Buff.deleteBuff(uuid, buff_type);
             return result ? {} : null;
         }, res)
     }
