@@ -24,6 +24,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.13.0",
+    "node-schedule": "^2.1.1",
     "uuid": "^11.1.0"
   }
 }

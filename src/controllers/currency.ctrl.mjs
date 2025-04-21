@@ -3,7 +3,6 @@ import { handleRequest } from "../utils/template.mjs";
 
 export const process = {
     getAllCurrencies: async(req, res) => {
-
         await handleRequest(async() =>{
             const result = await GetCurrency.all(req.uuid);
             return result != null ? { result } : null;
