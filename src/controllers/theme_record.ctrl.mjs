@@ -84,6 +84,12 @@ export const process = {
             const result =  await Rank.saveCumulative(uuid, theme, cumulative);
             return result ? {} : null;
         },res)
+    },
+    getRanker: async(req, res) =>{
+        await handleRequest(async () => {
+            const result = await Rank.getRanker();
+            return result != null ? { result } : null;
+        })
     }
 };
 

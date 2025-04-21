@@ -16,6 +16,13 @@ const UPDATE_RANKPOINT_QUERY = `UPDATE theme_records SET rank_point = ? WHERE uu
 const GET_CUMULATIVE_QUERY = `SELECT cumulative FROM theme_records WHERE uuid = ? AND theme = ?`;
 const UPDATE_CUMULATIVE_QUERY = `UPDATE theme_records SET cumulative = ? WHERE uuid = ? AND theme = ?`;
 
+const GET_RANKER_QUERY = `SELECT T.uuid, U.name, SUM(T.rank_point) AS total_rank_point
+                          FROM theme_records T
+                          JOIN users U ON T.uuid = U.uuid
+                          GROUP BY T.uuid, U.name
+                          ORDER BY total_rank_point DESC
+                              LIMIT 50;`;
+
 export const General = {
     insertRecords : async(uuid, records) => {
         try
@@ -118,5 +125,16 @@ export const Rank = {
             console.log('DB Error: ', error.message);
             return false;
         }
+    },getRanker : async() =>{
+        try
+        {
+            const [rows] = await db.query(GET_RANKER_QUERY);
+            return rows;
+        }
+        catch (error)
+        {
+
+        }
+
     }
 }
