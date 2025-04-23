@@ -17,6 +17,6 @@ router.post ('/api/users/progress/saveRankpoint', authenticateUser, themeRecordC
 router.get ('/api/users/progress/getCumulative', authenticateUser, themeRecordCtrl.process.getCumulative);
 router.post ('/api/users/progress/saveCumulative', authenticateUser, themeRecordCtrl.process.saveCumulative);
 
-router.get ('/api/users/general/getRanker', themeRecordCtrl.process.getRankpoint);
+router.get ('/api/users/general/getRanker', themeRecordCtrl.process.getRanker);
 
 export default router;
