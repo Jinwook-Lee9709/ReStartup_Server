@@ -89,7 +89,7 @@ export const process = {
         await handleRequest(async () => {
             const result = await Rank.getRanker();
             return result != null ? { result } : null;
-        })
+        },res)
     }
 };
 
