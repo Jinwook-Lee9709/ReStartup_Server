@@ -23,6 +23,15 @@ const GET_RANKER_QUERY = `SELECT T.uuid, U.name, SUM(T.rank_point) AS total_rank
                           ORDER BY total_rank_point DESC
                               LIMIT 50;`;
 
+const GET_USER_RANK_QUERY = `SELECT total_rank_point,ranking
+                             FROM
+                                 (SELECT
+                                     uuid, SUM(rank_point) AS total_rank_point, RANK() OVER (ORDER BY SUM(rank_point) DESC) AS ranking
+                                     FROM theme_records
+                                     GROUP BY uuid
+                                 )AS rank_data
+                             WHERE uuid = ?`;
+
 export const General = {
     insertRecords : async(uuid, records) => {
         try
@@ -133,8 +142,18 @@ export const Rank = {
         }
         catch (error)
         {
-
+            console.log('DB Error: ', error.message);
+            throw new Error(error);
         }
-
+    }, getUserRank : async(uuid) =>{
+        try
+        {
+            const [rows] = await db.query(GET_USER_RANK_QUERY, [uuid]);
+            return rows.length > 0 ? rows[0] : null;
+        }catch (error)
+        {
+            console.log('DB Error: ', error.message);
+            throw new Error(error);
+        }
     }
 }
