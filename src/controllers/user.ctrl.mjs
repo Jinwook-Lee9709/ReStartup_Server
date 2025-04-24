@@ -35,7 +35,7 @@ export const process = {
         {
             const uuid = req.uuid;
             const result = await User.getName(uuid);
-            return res.status(200).json({success: true, data : result});
+            return res.status(200).json({success: true, data : result.name});
         }
         catch(err)
         {
