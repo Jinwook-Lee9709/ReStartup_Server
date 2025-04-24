@@ -95,6 +95,7 @@ export const process = {
         await handleRequest(async () => {
             const uuid = req.uuid;
             const result = await Rank.getUserRank(uuid);
+            return result != null ? { result } : null;
         }, res)
     }
 };
