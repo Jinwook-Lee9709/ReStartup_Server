@@ -34,7 +34,7 @@ export const process = {
         await handleRequest(async() => {
             const uuid = req.uuid;
             const result = await User.getName(uuid);
-            return result ? { result } : { result : null };
+            return result ? { result } : null;
         },res)
     },
     updateName: async(req, res) => {
