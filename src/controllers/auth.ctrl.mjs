@@ -40,7 +40,7 @@ export const register = {
                     providerId: uuidv4(),
                     loginSource: 'Guest',
                 }
-            const result = await Register.getUser(userData);
+            const result = await Register.registerUser(userData);
             console.log(result);
             return res.status(200).json({success: true, data : userData.providerId});
         }catch (err)

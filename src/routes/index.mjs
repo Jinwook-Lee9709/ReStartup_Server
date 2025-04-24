@@ -8,6 +8,7 @@ import stageStatus from "./progress/stage_status.routes.mjs";
 import promotion from "./progress/promotion.routes.mjs";
 import buff from "./progress/buff.routes.mjs";
 import review from "./progress/review.routes.mjs";
+import mission from "./progress/mission.routes.mjs";
 
 const router = Router();
 
@@ -20,6 +21,7 @@ router.use(stageStatus);
 router.use(promotion);
 router.use(buff);
 router.use(review);
+router.use(mission);
 
 
 export default router;

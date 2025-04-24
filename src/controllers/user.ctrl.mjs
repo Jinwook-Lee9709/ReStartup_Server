@@ -1,6 +1,5 @@
 import { User } from '../models/user.dao.mjs';
-import {handleRequest} from "../utils/template.mjs";
-import {SaveStatus} from "../models/stage_status.dao.mjs";
+import { handleRequest } from "../utils/template.mjs";
 
 
 export const process = {
@@ -30,7 +29,21 @@ export const process = {
                 return res.status(500).json({success: false, message: "Database error"});
             }
         }
-
+    },
+    getName: async(req, res) => {
+        await handleRequest(async() => {
+            const uuid = req.uuid;
+            const result = await User.getName(uuid);
+            return result ? { result } : null;
+        },res)
+    },
+    updateName: async(req, res) => {
+        await handleRequest(async() => {
+            const uuid = req.uuid;
+            const name = req.body.name;
+            const result = await User.updateName(uuid, name);
+            return result ? {} : null;
+        }, res)
     }
 }
 

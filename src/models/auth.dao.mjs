@@ -16,7 +16,7 @@ export const Login = {
 }
 
 export const Register = {
-    getUser: async (userData) => {
+    registerUser: async (userData) => {
         try {
             const [result] = await db.query(CREATE_USER_QUERY, [userData.uuid, userData.providerId, userData.loginSource]);
             return result;
