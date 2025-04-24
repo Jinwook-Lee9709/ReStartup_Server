@@ -12,7 +12,7 @@ export const mission = {
     saveMission: async (req, res) => {
         await handleRequest(async () => {
             const uuid = req.uuid;
-            const info = req.info;
+            const info = req.body.info;
             const result = await Mission.saveMission(uuid, info);
         }, res)
     }

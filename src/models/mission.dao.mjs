@@ -23,7 +23,6 @@ export const Mission = {
             if(typeof  info == "string"){
                 info = JSON.parse(info);
             }
-            console.log(info);
             const id = info.id;
             const count = info.count;
             const is_cleared = info.is_cleared;
