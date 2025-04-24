@@ -31,11 +31,18 @@ export const process = {
         }
     },
     getName: async(req, res) => {
-        await handleRequest(async() => {
+        try
+        {
             const uuid = req.uuid;
             const result = await User.getName(uuid);
-            return result ? { result } : null;
-        },res)
+            return res.status(200).json({success: true, data : result});
+        }
+        catch(err)
+        {
+            console.log(`Register Request Failed with : ${err}`);
+            return res.status(500).json( {success: false, data: null});
+        }
+
     },
     updateName: async(req, res) => {
         await handleRequest(async() => {
