@@ -23,7 +23,7 @@ export const Mission = {
             if(typeof  info == "string"){
                 info = JSON.parse(info);
             }
-            const id = info.id;
+            const id = info.mission_id;
             const count = info.count;
             const is_cleared = info.is_cleared;
             const [result] = await db.query(SAVE_MISSION_QUERY, [uuid, id, count, is_cleared]);
