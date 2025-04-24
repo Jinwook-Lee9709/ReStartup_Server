@@ -14,6 +14,7 @@ export const mission = {
             const uuid = req.uuid;
             const info = req.body.info;
             const result = await Mission.saveMission(uuid, info);
+            return result ? {} : null;
         }, res)
     }
 }
