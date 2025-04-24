@@ -1,7 +1,8 @@
 import { db }  from '../config/db.mjs';
 
 const GET_MISSIONS_QUERY = `SELECT * FROM mission WHERE uuid = ?`
-const SAVE_MISSION_QUERY = `INSERT INTO mission (uuid, mission_id, count, is_cleared) VALUES (?, ?, ?, ?)`
+const SAVE_MISSION_QUERY = `INSERT INTO mission (uuid, mission_id, count, is_cleared) VALUES (?, ?, ?, ?)
+ON DUPLICATE KEY UPDATE count = VALUES(count), is_cleared = VALUES(is_cleared)`
 
 
 export const Mission = {
