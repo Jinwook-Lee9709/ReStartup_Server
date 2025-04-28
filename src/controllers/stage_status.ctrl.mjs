@@ -1,5 +1,6 @@
 import { GetStatus, SaveStatus } from "../models/stage_status.dao.mjs";
 import { handleRequest } from "../utils/template.mjs";
+import {Types} from "mysql2";
 
 export const process = {
     getAllStatus: async(req, res) => {
@@ -12,6 +13,8 @@ export const process = {
     saveStatus: async(req, res) => {
         await handleRequest(async() => {
             const uuid = req.uuid;
+            console.log(req.body);
+            console.log(uuid);
             const info = req.body.info;
             const result = await SaveStatus.single(uuid, info);
             return result ? {} : null;

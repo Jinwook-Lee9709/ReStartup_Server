@@ -19,6 +19,9 @@ export const SaveStatus = {
     single: async (uuid, info) => {
         try
         {
+            if(typeof  info == "string"){
+                info = JSON.parse(info);
+            }
             const { theme, is_cleared, last_claim, manager_count } = info;
 
             const [result] = await db.query(SAVE_THEME_INFO_QUERY, [uuid, theme, is_cleared, last_claim, manager_count]);
