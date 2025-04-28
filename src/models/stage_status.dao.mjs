@@ -1,7 +1,7 @@
 import { db } from '../config/db.mjs';
 
 const GET_ALL_QUERY = 'SELECT * FROM stage_status WHERE uuid = ?';
-const SAVE_THEME_INFO_QUERY = 'INSERT INTO stage_status (uuid, theme, is_cleared, last_played) VALUES (?, ?, ?, ?)';
+const SAVE_THEME_INFO_QUERY = 'INSERT INTO stage_status (uuid, theme, is_cleared, last_claim, manager_count) VALUES (?, ?, ?, ?)';
 
 export const GetStatus ={
     all: async (uuid) => {
@@ -19,9 +19,9 @@ export const SaveStatus = {
     single: async (uuid, info) => {
         try
         {
-            const { theme, is_cleared, last_Played } = info;
+            const { theme, is_cleared, last_claim, manager_count } = info;
 
-            const [result] = await db.query(SAVE_THEME_INFO_QUERY, [uuid, theme, is_cleared, last_Played]);
+            const [result] = await db.query(SAVE_THEME_INFO_QUERY, [uuid, theme, is_cleared, last_claim, manager_count]);
             return result.affectedRows > 0;
         }
         catch (error)
