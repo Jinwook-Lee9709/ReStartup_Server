@@ -1,6 +1,5 @@
 import { GetStatus, SaveStatus } from "../models/stage_status.dao.mjs";
 import { handleRequest } from "../utils/template.mjs";
-import {Types} from "mysql2";
 
 export const process = {
     getAllStatus: async(req, res) => {
