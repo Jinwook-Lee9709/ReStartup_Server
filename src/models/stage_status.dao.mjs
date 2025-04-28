@@ -1,7 +1,7 @@
 import { db } from '../config/db.mjs';
 
 const GET_ALL_QUERY = 'SELECT * FROM stage_status WHERE uuid = ?';
-const SAVE_THEME_INFO_QUERY = 'INSERT INTO stage_status (uuid, theme, is_cleared, last_claim, manager_count) VALUES (?, ?, ?, ?)';
+const SAVE_THEME_INFO_QUERY = 'INSERT INTO stage_status (uuid, theme, is_cleared, last_claim, manager_count) VALUES (?, ?, ?, ?, ?)';
 
 export const GetStatus ={
     all: async (uuid) => {
