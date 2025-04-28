@@ -12,9 +12,6 @@ export const process = {
     saveStatus: async(req, res) => {
         await handleRequest(async() => {
             const uuid = req.uuid;
-            console.log(req);
-            console.log(req.body.length);
-            console.log(uuid);
             const info = req.body.info;
             const result = await SaveStatus.single(uuid, info);
             return result ? {} : null;
