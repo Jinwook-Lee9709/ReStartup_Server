@@ -1,14 +1,14 @@
 
 import {db} from "../config/db.mjs";
 import { scheduleJob } from 'node-schedule';
-
+import { Promotion } from "../models/promotion.dao.mjs";
 
 const PROMOTION_RESET_QUERY = 'UPDATE promotion SET buy_use_count = 0, '
 
 const runQuery =  async () => {
     try {
-        const result = await db.query("UPDATE ");
-        console.log(`Daily initialize task: ${result > 0 ? "Success" : "Failed"}`);
+        const result = await Promotion.resetAllPromotions();
+        console.log(`Daily initialize task: ${result ? "Success" : "Failed"}`);
     }catch (error) {
         console.log(`Daily initialize task Failed: ${error}`);
     }

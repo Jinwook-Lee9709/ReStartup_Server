@@ -7,6 +7,6 @@ const router = Router();
 
 router.get('/api/users/getPromotions', authenticateUser, promotionCtrl.process.getAllPromotions);
 router.post('/api/users/savePromotions', authenticateUser, promotionCtrl.process.saveAllPromotions);
-
+router.post('/api/users/resetPromotions', authenticateUser, promotionCtrl.process.resetPromotions);
 
 export default router;

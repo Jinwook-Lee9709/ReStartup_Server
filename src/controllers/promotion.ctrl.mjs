@@ -17,6 +17,13 @@ export const process ={
             return result ? {} : null;
         }, res)
     },
+    resetPromotions: async (req, res) => {
+        await handleRequest(async () =>{
+            const uuid = req.uuid;
+            const result = await Promotion.resetPromotion(uuid);
+            return result ? {} : null;
+        }, res)
+    }
 }
 
 export default { process };
