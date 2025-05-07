@@ -19,7 +19,9 @@ export const Review = {
     {
         try{
             const [result] = await db.execute(DELETE_REVIEW_PROCEDURE, [uuid, orderIndex]);
-            return result.affectedRows > 0;
+            const success = result[1][0].success; // 프로시저 success_flag 값 확인
+            return success === 1; // 성공 여부 반환
+
         }catch(error){
             console.log(error);
             throw error;
