@@ -140,6 +140,7 @@ export const Rank = {
     saveIsClaimed : async(uuid, theme, isClaimed) => {
         try
         {
+            console.log(isClaimed);
             const [result] = await db.query(UPDATE_IS_CLAIMED_QUERY, [isClaimed, uuid, theme]);
             return result.affectedRows > 0;
         }
