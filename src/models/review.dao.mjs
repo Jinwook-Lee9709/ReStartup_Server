@@ -1,7 +1,7 @@
 import { db } from '../config/db.mjs';
 
 const INSERT_REVIEW_PROCEDURE = `CALL InsertReview(?, ?, ?, ?)`;
-const DELETE_REVIEW_PROCEDURE  = `CALL DeleteMiddleAndReorder(?, ?)`;
+const DELETE_REVIEW_PROCEDURE  = `CALL DeleteMiddleAndReorder(?, ?, @success_flag)`;
 const GET_ALL_REVIEW_QUERY = `SELECT * FROM review WHERE uuid = ?`;
 
 export const Review = {
