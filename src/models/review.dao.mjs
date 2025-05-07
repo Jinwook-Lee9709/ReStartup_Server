@@ -1,7 +1,9 @@
 import { db } from '../config/db.mjs';
 
 const INSERT_REVIEW_PROCEDURE = `CALL InsertReview(?, ?, ?, ?)`;
-const DELETE_REVIEW_PROCEDURE  = `CALL DeleteMiddleAndReorder(?, ?, @success_flag)`;
+const DELETE_REVIEW_PROCEDURE  = `CALL DeleteMiddleAndReorder(?, ?, @success_flag);
+            SELECT @success_flag AS success_flag;
+`;
 const GET_ALL_REVIEW_QUERY = `SELECT * FROM review WHERE uuid = ?`;
 
 export const Review = {
@@ -18,9 +20,12 @@ export const Review = {
     delete: async (uuid, orderIndex)=>
     {
         try{
-            const [result] = await db.execute(DELETE_REVIEW_PROCEDURE, [uuid, orderIndex]);
-            console.log(result);
-            return result.affectedRows > 0;
+            const [resultSets] = await db.query(DELETE_REVIEW_PROCEDURE, [uuid, orderIndex]);
+            const successFlag = resultSets[1][0].success_flag;
+
+            console.log('Success Flag:', successFlag);
+            return successFlag === 1;
+
         }catch(error){
             console.log(error);
             throw error;
