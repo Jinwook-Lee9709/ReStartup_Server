@@ -24,6 +24,7 @@ export const Review = {
             const successFlag = resultSets[1][0].success_flag;
 
             console.log('Success Flag:', successFlag);
+            console.log('Result Sets:', resultSets);
             return successFlag === 1;
 
         }catch(error){
