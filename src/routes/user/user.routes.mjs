@@ -7,6 +7,7 @@ const router = Router();
 
 router.get ('/api/users/getInfo', authenticateUser, userCtrl.process.getInfo);
 router.get ('/api/users/getName', authenticateUser, userCtrl.process.getName);
+router.get('/api/users/isExist', authenticateUser, userCtrl.process.getIsExist);
 router.post ('/api/users/updateName', authenticateUser, userCtrl.process.updateName);
 
 

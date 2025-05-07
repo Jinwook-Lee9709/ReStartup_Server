@@ -51,6 +51,13 @@ export const process = {
             const result = await User.updateName(uuid, name);
             return result ? {} : null;
         }, res)
+    },
+    getIsExist: async(req, res) => {
+        await handleRequest(async() => {
+            const name = req.query.name;
+            const result = await User.getIsExist(name);
+            return result != null ? { result } : null;
+        }, res)
     }
 }
 
