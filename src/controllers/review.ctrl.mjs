@@ -14,9 +14,9 @@ export const process = {
     },
     delete: async (req, res) => {
         await handleRequest(async() => {
-            console.log(req.body);
             const uuid = req.uuid;
             const orderIndex = req.body.orderIndex;
+            console.log(uuid, orderIndex);
             const result = await Review.delete(uuid, orderIndex);
             return result ? {} : null;
         }, res)
