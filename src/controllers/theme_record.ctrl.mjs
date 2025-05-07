@@ -92,7 +92,7 @@ export const process = {
             const isClaimed = req.body.is_claimed;
             if(theme == null || isClaimed == null)
                 return null;
-            const result =  await Rank.saveCumulative(uuid, theme, isClaimed);
+            const result =  await Rank.saveIsClaimed(uuid, theme, isClaimed);
             return result ? {} : null;
         },res)
     }
