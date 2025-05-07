@@ -16,6 +16,8 @@ const UPDATE_RANKPOINT_QUERY = `UPDATE theme_records SET rank_point = ? WHERE uu
 const GET_CUMULATIVE_QUERY = `SELECT cumulative FROM theme_records WHERE uuid = ? AND theme = ?`;
 const UPDATE_CUMULATIVE_QUERY = `UPDATE theme_records SET cumulative = ? WHERE uuid = ? AND theme = ?`;
 
+const UPDATE_IS_CLAIMED_QUERY = `UPDATE theme_records SET is_claimed = ? WHERE uuid = ? AND theme = ?`;
+
 const GET_RANKER_QUERY = `SELECT T.uuid, U.name, SUM(T.rank_point) AS total_rank_point
                           FROM theme_records T
                           JOIN users U ON T.uuid = U.uuid
@@ -134,7 +136,22 @@ export const Rank = {
             console.log('DB Error: ', error.message);
             return false;
         }
-    },getRanker : async() =>{
+    },
+    saveIsClaimed : async(uuid, theme, isClaimed) => {
+        try
+        {
+            const [result] = await db.query(UPDATE_IS_CLAIMED_QUERY, [isClaimed, uuid, theme]);
+            return result.affectedRows > 0;
+        }
+        catch (error)
+        {
+            console.log('DB Error: ', error.message);
+            return false;
+        }
+    }
+
+
+    ,getRanker : async() =>{
         try
         {
             const [rows] = await db.query(GET_RANKER_QUERY);
