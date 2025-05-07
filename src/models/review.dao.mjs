@@ -18,9 +18,9 @@ export const Review = {
     delete: async (uuid, orderIndex)=>
     {
         try{
-            let isSuccess;
-            const [result] = await db.execute(DELETE_REVIEW_PROCEDURE, [uuid, orderIndex, isSuccess]);
-            return isSuccess;
+            const [result] = await db.execute(DELETE_REVIEW_PROCEDURE, [uuid, orderIndex]);
+            console.log(result);
+            return result.affectedRows > 0;
         }catch(error){
             console.log(error);
             throw error;
