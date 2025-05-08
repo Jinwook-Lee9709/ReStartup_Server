@@ -15,7 +15,7 @@ const runQuery =  async () => {
 }
 
 const setupDailyJob = () => {
-    scheduleJob('0 5 * * *', runQuery);
+    scheduleJob('22 0 * * *', runQuery);
     console.log("Daily initialize task setup");
 };
 

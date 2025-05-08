@@ -16,7 +16,6 @@ export const authenticateUser = (req, res, next) => {
 
         }
         req.uuid = result.uuid;
-        console.log('User authenticated');
         next();
     } catch (err) {
         console.error('Error in authentication middleware:', err);
