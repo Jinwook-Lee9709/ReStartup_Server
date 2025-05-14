@@ -1,7 +1,7 @@
 import https from "https";
 import fs from "fs";
 import app from "../src/app.mjs";
-import setupDailyJob from "../src/schedules/dailyJob.mjs";
+import {setupDailyJob, setupWeeklyJob} from "../src/schedules/dailyJob.mjs";
 
 
 // 서버가 사용할 포트 설정
@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 })
 
 setupDailyJob();
+setupWeeklyJob();
 
 
 https.createServer(options, app).listen(PORT, () => {

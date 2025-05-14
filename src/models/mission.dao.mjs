@@ -3,6 +3,9 @@ import { db }  from '../config/db.mjs';
 const GET_MISSIONS_QUERY = `SELECT * FROM mission WHERE uuid = ?`
 const SAVE_MISSION_QUERY = `INSERT INTO mission (uuid, mission_id, count, is_cleared) VALUES (?, ?, ?, ?)
 ON DUPLICATE KEY UPDATE count = VALUES(count), is_cleared = VALUES(is_cleared)`
+const DAILY_MISSION_RESET_QUERY = 'UPDATE mission SET count = 0 AND is_cleared = 0 WHERE mission_id > 97012000 AND mission_id < 97013000';
+const WEEKELY_MISSION_RESET_QUERY = 'UPDATE mission SET count = 0 AND is_cleared = 0 WHERE mission_id > 97013000 AND mission_id < 97014000';
+
 
 
 export const Mission = {
@@ -31,6 +34,30 @@ export const Mission = {
             return result.affectedRows > 0;
         }
         catch (error)
+        {
+            console.log('DB Error: ', error.message);
+            return false;
+        }
+    },
+    resetDailyMission: async () => {
+        try
+        {
+            const [result] = await db.query(DAILY_MISSION_RESET_QUERY);
+            return result.affectedRows > 0;
+        }
+        catch(error)
+        {
+            console.log('DB Error: ', error.message);
+            return false;
+        }
+    },
+    resetWeeklyMission: async () => {
+        try
+        {
+            const [result] = await db.query(WEEKELY_MISSION_RESET_QUERY);
+            return result.affectedRows > 0;
+        }
+        catch(error)
         {
             console.log('DB Error: ', error.message);
             return false;
