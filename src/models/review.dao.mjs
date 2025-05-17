@@ -21,7 +21,7 @@ export const Review = {
             await db.query(DELETE_REVIEW_PROCEDURE, [uuid, orderIndex]);
             const [[row]] = await db.query('SELECT @success_flag AS success_flag');
 
-            return row.success_Flag === 1;
+            return true;
         }catch(error){
             console.log(error);
             throw error;
